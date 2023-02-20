@@ -1,0 +1,17 @@
+{% for film in boxoffice %}
+    <tr>
+        <td class="border">{{film.title}}</td>
+        <td class="border">{{film.weekly_gross}}</td>
+        <td class="border">{{film.total_gross}}</td>
+        <td class="border">{{film.weeks_released}}</td>
+    </tr>
+{% endfor %}
+
+<tr>
+    <td colspan="2">
+        <button class="px-3 py-1 bg-blue-600 text-white ml-4"
+        hx-get="/demo?page={{ page + 1 }}"
+        hx-target="#table-body"
+        hx-swap="beforeend">Update Table</button>
+    </td>
+</tr>
