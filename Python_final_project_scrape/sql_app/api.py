@@ -36,17 +36,13 @@ def startup_populate_db():
     
 
 @app.get("/demo", response_class=HTMLResponse)
-def demo(
+async def demo(
     request: Request, 
     hx_request: Optional[str] = Header(None),
-    db: Session = Depends(get_db),
-    page: int = 1
+    db: Session = Depends(get_db)
 ):
     boxoffice = db.query(models.Film).all()
-    context = {"request": request, "boxoffice": boxoffice, "page": page}
+    context = {"request": request, "boxoffice": boxoffice}
     if hx_request:
         return templates.TemplateResponse("table.html", context)
     return templates.TemplateResponse("demo.html", context)
-
-
-

@@ -27,6 +27,11 @@
                     <tbody class="text-center text-sm" id="table-body">
                         {% include "table.html" %}
                     </tbody>
+                    <button class="px-3 py-1 bg-blue-600 text-white ml-4"
+                    hx-get="/demo"
+                    hx-target="#table-body"
+                    hx-swap="beforeend">Update Table</button>
+
             </table>
 
 

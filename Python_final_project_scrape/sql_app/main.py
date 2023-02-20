@@ -1,7 +1,7 @@
 from typing import List
 import requests
 from bs4 import BeautifulSoup
-from models2 import Boxoffice
+from schema import Boxoffice
 
 
 api_base_url = "http://127.0.0.1:8000/"
@@ -32,7 +32,7 @@ film_tags = film_soup.find_all(attrs={"class": "posterColumn"})
 # print(test_film)
 
 boxoffice: List[Boxoffice] = []
-boxoffice2: List[Boxoffice] = []
+boxoffice2 = []
 
 for film in film_tags:
     total_gross = film.find(attrs={"class": "secondaryInfo"}).text.strip()
@@ -47,7 +47,7 @@ for film in film_tags:
 for film in boxoffice:
     film = film.dict()
     boxoffice2.append(film)
-
+print(boxoffice2)
 
     # boxoffice = [{'title': "Magic Mike's Last Dance", 'weekly_gross': '$8.3M', 'total_gross': '$8.3M', 'weeks_released': 1}, 
     # {'title': 'Avatar: The Way of Water', 'weekly_gross': '$7.2M', 'total_gross': '$647.3M', 'weeks_released': 9}, 
