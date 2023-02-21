@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Current US Boxoffice Returns</title>
+
+    <script src="https://unpkg.com/htmx.org@1.6.1"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.10.3/dist/cdn.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+
+<div class="mx-4">
+    <h1 class="text-2xl font-bold mb-4">US Boxoffice</h1>
+
+    <table class="w-full text-sm text-left text-grey-500 dark:text-grey-400">
+            <thead class="text-ws text-grey-700 uppercase bg-grey-50 dark: text-grey-700 dark: text-grey-400">
+                <tr>
+                    <th scope="col" class="py-3 px-6">Film Title</th>
+                    <th scope="col" class="py-3 px-6">Weekly Gross</th>
+                    <th scope="col" class="py-3 px-6">Total Gross</th>
+                    <th scope="col" class="py-3 px-6">Weeks Released</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for movie in movies %}
+                    <tr class="bg-white border-b dark: bg-grey-800 dark: border-grey-700">
+                        <td>{{movie.title}}</td>
+                        <td>{{movie.weekly_gross}}</td>
+                        <td>{{movie.total_gross}}</td>
+                        <td>{{movie.weeks_released}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+    </table>
+</div>
+
+</body>
+</html>

@@ -1,13 +1,17 @@
 import json
-from fastapi import FastAPI, Response, Depends
+from fastapi import FastAPI, Response, Depends, Request
 from typing import List, Union
 from sqlmodel import Session, select
+from fastapi.templating import Jinja2Templates
+from fastapi.responses import HTMLResponse
 
 from models import Boxoffice
 from scrape import boxoffice2
 from database import FilmModel, engine
 
 app = FastAPI()
+
+templates = Jinja2Templates(directory="templates")
 
 data= []
 
@@ -30,6 +34,13 @@ async def startup_event():
 def get_session():
     with Session(engine) as session:
         yield session
+
+@app.get("/show_boxoffice", response_class=HTMLResponse)
+def show_boxoffice(request: Request, session: Session = Depends(get_session)):
+    movies = session.exec(select(FilmModel))
+    context = {"request": request, "movies": movies}
+    return templates.TemplateResponse("movies.html", context)
+
 
 @app.get("/boxoffice/", response_model=List[Boxoffice])
 def get_boxoffice(session: Session = Depends(get_session)):

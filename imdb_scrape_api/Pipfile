@@ -10,6 +10,7 @@ uvicorn = "*"
 fastapi = "*"
 pydantic = "*"
 sqlmodel = "*"
+jinja2 = "*"
 
 [dev-packages]
 
